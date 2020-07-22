@@ -13,7 +13,7 @@ class YourElephantPage extends StatelessWidget {
         preferredSize: Size.fromHeight(45),
         child: AppBar(
           title: Text(
-            "Elephant of the day",
+            "Your elephant of the day",
             style: TextStyle(
               color: Colors.white,
               fontFamily: "Lora",

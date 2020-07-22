@@ -1,29 +1,18 @@
 import 'package:elephant_app/conts/constsApp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress_button/flutter_progress_button.dart';
+import 'package:elephant_app/conts/routes.dart';
+
 
 class SortElephantPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screeHeight = MediaQuery.of(context).size.height;
     double screewidth = MediaQuery.of(context).size.width;
+    double appBarPhone = MediaQuery.of(context).padding.top;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: ConstsApp.brownColor,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(45),
-        child: AppBar(
-          title: Text(
-            "Elephant of the day",
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: "Lora",
-              fontWeight: FontWeight.w500,
-              fontSize: 24,
-            ),
-          ),
-          centerTitle: true,
-        ),
-      ),
       body: SafeArea(
         top: false,
         child: Stack(
@@ -34,6 +23,53 @@ class SortElephantPage extends StatelessWidget {
               width: screewidth,
               fit: BoxFit.cover,
               alignment: Alignment(-0.4, 0),
+            ),
+            Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: appBarPhone + 16,
+                  ),
+                  child: Text(
+                    "Elephant of the day",
+                    style: TextStyle(
+                      color: ConstsApp.primaryGreenColor,
+                      fontFamily: "Lora",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 32,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 70,
+                ),
+                Center(
+                  child: ProgressButton(
+                    defaultWidget: Text(
+                      'Sort',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Lora",
+                        fontWeight: FontWeight.w500,
+                        fontSize: 27,
+                      ),
+                    ),
+                    progressWidget: CircularProgressIndicator(
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.white)),
+                    color: ConstsApp.primaryGreenColor,
+                    width: 150,
+                    height: 50,
+                    onPressed: () async {
+                      await Future.delayed(
+                          Duration(milliseconds: 4000), () => 42);
+                      
+                      Navigator.pushNamed(context, yourElephantPage);
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),

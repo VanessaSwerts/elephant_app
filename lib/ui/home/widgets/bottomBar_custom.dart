@@ -2,6 +2,10 @@ import 'package:elephant_app/conts/constsApp.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomBar extends StatelessWidget {
+  final int currentIndex;
+  final Function func;
+
+  CustomBottomBar({this.currentIndex, this.func});
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -14,7 +18,8 @@ class CustomBottomBar extends StatelessWidget {
       ),
       child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          currentIndex: 0,          
+          currentIndex: currentIndex,
+          onTap: func,
           items: [
             BottomNavigationBarItem(
               icon: Icon(
@@ -69,7 +74,7 @@ class CustomBottomBar extends StatelessWidget {
             BottomNavigationBarItem(
                 icon: Icon(Icons.wb_sunny),
                 title: Text(
-                  'Your Elephant',
+                  'Sort',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: "Lora",

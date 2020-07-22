@@ -113,7 +113,7 @@ class CustomAppBar extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

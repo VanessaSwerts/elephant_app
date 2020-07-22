@@ -1,7 +1,16 @@
 import 'package:elephant_app/conts/constsApp.dart';
+import 'package:elephant_app/store/elephant_api_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
-class ListElephants extends StatelessWidget {
+class ListElephants extends StatefulWidget {
+  @override
+  _ListElephantsState createState() => _ListElephantsState();
+}
+
+class _ListElephantsState extends State<ListElephants> {
+  ElephantStore elephant = ElephantStore();
+
   @override
   Widget build(BuildContext context) {
     double screeHeight = MediaQuery.of(context).size.height;
@@ -10,8 +19,8 @@ class ListElephants extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: ConstsApp.brownColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(45),
-              child: AppBar(
+        preferredSize: Size.fromHeight(40),
+        child: AppBar(
           title: Text(
             "All Elephants",
             style: TextStyle(

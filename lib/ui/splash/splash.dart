@@ -19,9 +19,7 @@ class _SplashState extends State<Splash> {
         DeviceOrientation.portraitDown,
       ],
     );
-
-    SystemChrome.setEnabledSystemUIOverlays([]);
-
+    
     Future.delayed(Duration(seconds: 3)).then(
       (_) {
         Navigator.pushReplacementNamed(context, home);

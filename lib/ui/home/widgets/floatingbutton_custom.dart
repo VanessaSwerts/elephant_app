@@ -24,7 +24,7 @@ class CustomFloatingButton extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Navigator.pushNamed(context, sortElephantPage);
+          Navigator.pushNamed(context, searchPage);
         },
       ),
     );

@@ -10,8 +10,8 @@ class FavoritesPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: ConstsApp.brownColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(45),
-              child: AppBar(
+        preferredSize: Size.fromHeight(40),
+        child: AppBar(
           title: Text(
             "Favorites",
             style: TextStyle(
