@@ -10,27 +10,17 @@ class ElephantStore = _ElephantStoreBase with _$ElephantStore;
 
 abstract class _ElephantStoreBase with Store {
   @observable
-  ElephantsAPI _elephantAPI;
+  ObservableList<ElephantsAPI> elephantList = ObservableList<ElephantsAPI>();
 
-  @computed
-  ElephantsAPI get elephantAPI => _elephantAPI;
-
-  @action
-  fetchElephant() {
-    _elephantAPI = null;
-    loadElephantAPI().then((elephant) {
-      _elephantAPI = elephant;
-    });
-  }
-
-  Future<ElephantsAPI> loadElephantAPI() async {
-    try {
-      final responde = await http.get(ConstsAPI.urlElephantAPI);
-      var decodeJson = jsonDecode(responde.body);
-      return ElephantsAPI.fromJson(decodeJson);
-    } catch (e) {
-      print("Erro ao carregar API: $e");
-      return null;
+  Future<ObservableList<ElephantsAPI>> loadElephantAPI() async {
+    final responseData = await http.get(ConstsAPI.urlElephantAPI);
+    final data = jsonDecode(responseData.body);
+    //print(data);
+    for (Map i in data) {
+      if (ElephantsAPI.fromJson(i).name != null) {
+        elephantList.add(ElephantsAPI.fromJson(i));
+      }
     }
+    return elephantList;
   }
 }

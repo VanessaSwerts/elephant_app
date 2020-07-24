@@ -1,10 +1,24 @@
 import 'package:elephant_app/conts/constsApp.dart';
+import 'package:elephant_app/store/elephant_api_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:elephant_app/conts/routes.dart';
+import 'package:get_it/get_it.dart';
 
+class SortElephantPage extends StatefulWidget {
+  @override
+  _SortElephantPageState createState() => _SortElephantPageState();
+}
 
-class SortElephantPage extends StatelessWidget {
+class _SortElephantPageState extends State<SortElephantPage> {
+  ElephantStore _elephantStore;
+
+  @override
+  void initState() {
+    _elephantStore = GetIt.instance<ElephantStore>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screeHeight = MediaQuery.of(context).size.height;
@@ -61,10 +75,9 @@ class SortElephantPage extends StatelessWidget {
                     color: ConstsApp.primaryGreenColor,
                     width: 150,
                     height: 50,
-                    onPressed: () async {
+                    onPressed: () async {                                        
                       await Future.delayed(
                           Duration(milliseconds: 4000), () => 42);
-                      
                       Navigator.pushNamed(context, yourElephantPage);
                     },
                   ),

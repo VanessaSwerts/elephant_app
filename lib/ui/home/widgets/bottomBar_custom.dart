@@ -10,7 +10,7 @@ class CustomBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        canvasColor: ConstsApp.secondaryGreedColor,
+        canvasColor: ConstsApp.secondaryGreenColor,
         primaryColor: Colors.grey,
         textTheme: Theme.of(context).textTheme.copyWith(
               caption: TextStyle(color: Colors.white),
