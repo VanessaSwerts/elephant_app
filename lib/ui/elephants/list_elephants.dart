@@ -12,6 +12,7 @@ class ListElephants extends StatefulWidget {
 
 class _ListElephantsState extends State<ListElephants> {
   ElephantStore _elephantStore;
+  int _valueDropBox = 0;
 
   @override
   void initState() {
@@ -60,7 +61,77 @@ class _ListElephantsState extends State<ListElephants> {
             Column(
               children: <Widget>[
                 SizedBox(
-                  height: 60.0,
+                  height: 30.0,
+                ),
+                Row(
+                  children: <Widget>[
+                    Spacer(),
+                    Container(
+                      height: 25,
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white, border: Border.all()),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                            value: _valueDropBox,
+                            items: [
+                              DropdownMenuItem(
+                                child: Text(
+                                  "Order by",
+                                  style: TextStyle(
+                                    color: ConstsApp.primaryGreenColor,
+                                    fontFamily: "Lora",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                value: 0,
+                              ),
+                              DropdownMenuItem(
+                                child: Text(
+                                  "Name",
+                                  style: TextStyle(
+                                    color: ConstsApp.primaryGreenColor,
+                                    fontFamily: "Lora",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                value: 1,
+                              ),
+                              DropdownMenuItem(
+                                child: Text(
+                                  "Sex",
+                                  style: TextStyle(
+                                    color: ConstsApp.primaryGreenColor,
+                                    fontFamily: "Lora",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                value: 2,
+                              ),
+                              DropdownMenuItem(
+                                child: Text(
+                                  "Specie",
+                                  style: TextStyle(
+                                    color: ConstsApp.primaryGreenColor,
+                                    fontFamily: "Lora",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                value: 3,
+                              ),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                _valueDropBox = value;
+                              });
+                            }),
+                      ),
+                    ),
+                  ],
                 ),
                 Expanded(
                   child: Observer(
@@ -84,50 +155,58 @@ class _ListElephantsState extends State<ListElephants> {
                               ),
                               itemCount: _elephantStore.elephantList.length,
                               itemBuilder: (context, index) {
-                                return Container(
-                                  width: 65,
-                                  height: 65,
-                                  color: ConstsApp.opacityGreenColor,
-                                  child: Column(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: CircleAvatar(
-                                            backgroundColor: Colors.transparent,
-                                            radius: 25,                                             
-                                            child: CachedNetworkImage(
-                                              imageUrl: _elephantStore
-                                                  .elephantList[index].image,
-                                              placeholder: (context, url) =>
-                                                  const CircularProgressIndicator(
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                        Color>(Colors.white),
-                                                strokeWidth: 3.0,
+                                return InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    width: 65,
+                                    height: 65,
+                                    color: ConstsApp.opacityGreenColor,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CachedNetworkImage(
+                                            imageUrl: _elephantStore
+                                                .elephantList[index].image,
+                                            placeholder: (context, url) =>
+                                                CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                      Colors.white),
+                                              strokeWidth: 3.0,
+                                            ),
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    Container(
+                                              width: 60,
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
-                                            )),
-                                      ),
-                                      Text(
-                                        _elephantStore.elephantList[index].name
-                                                    .length >
-                                                16
-                                            ? _elephantStore
-                                                .elephantList[index].name
-                                                .split("")
-                                                .first
-                                            : _elephantStore
-                                                .elephantList[index].name,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: "Lora",
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12,
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          _elephantStore
+                                              .elephantList[index].name,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: "Lora",
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 );
                               });

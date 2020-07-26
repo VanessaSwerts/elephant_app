@@ -12,6 +12,4 @@ class ConstsApp {
   static Color secondaryGreenColor = Color.fromRGBO(23, 58, 22, 1);
   static Color opacityGreenColor = Color.fromRGBO(37, 82, 40, 0.71);
   static Color brownColor = Color.fromRGBO(90, 78, 38, 1);
- 
 }
-

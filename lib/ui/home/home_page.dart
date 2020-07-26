@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           );
-        }
+        }     
       case 4:
         return SortElephantPage();
       default:

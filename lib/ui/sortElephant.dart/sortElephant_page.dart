@@ -1,5 +1,5 @@
 import 'package:elephant_app/conts/constsApp.dart';
-import 'package:elephant_app/store/elephant_api_store.dart';
+import 'package:elephant_app/store/random_elephant_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';
 import 'package:elephant_app/conts/routes.dart';
@@ -11,11 +11,11 @@ class SortElephantPage extends StatefulWidget {
 }
 
 class _SortElephantPageState extends State<SortElephantPage> {
-  ElephantStore _elephantStore;
+  RandomElephantStore _randomElephantStore;
 
   @override
   void initState() {
-    _elephantStore = GetIt.instance<ElephantStore>();
+    _randomElephantStore = GetIt.instance<RandomElephantStore>();
     super.initState();
   }
 
@@ -75,10 +75,16 @@ class _SortElephantPageState extends State<SortElephantPage> {
                     color: ConstsApp.primaryGreenColor,
                     width: 150,
                     height: 50,
-                    onPressed: () async {                                        
+                    onPressed: () async {
                       await Future.delayed(
-                          Duration(milliseconds: 4000), () => 42);
-                      Navigator.pushNamed(context, yourElephantPage);
+                          Duration(milliseconds: 3000), () => 30);
+                      // _randomElephantStore
+                      //     .loadRandomElephantAPI()
+                      //     .then((random) {
+                      //   Navigator.pushNamed(context, yourElephantPage);
+                      // });
+
+                      Navigator.pushReplacementNamed(context, yourElephantPage);
                     },
                   ),
                 ),

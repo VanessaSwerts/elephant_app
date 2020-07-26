@@ -1,7 +1,14 @@
 import 'package:elephant_app/conts/constsApp.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatefulWidget {
+  @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  int _radioValue1 = -1;
+
   @override
   Widget build(BuildContext context) {
     double appBarPhone = MediaQuery.of(context).padding.top;
@@ -67,11 +74,11 @@ class CustomAppBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 8,
-              ),
-              SizedBox(width: 5),
+              Radio(
+                  value: 0,
+                  groupValue: _radioValue1,
+                  activeColor: Colors.white,                  
+                  onChanged: (index) {}),
               Text(
                 "Name",
                 style: TextStyle(
@@ -81,12 +88,11 @@ class CustomAppBar extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
-              SizedBox(width: 15),
-              CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 8,
+              Radio(
+                value: 0,
+                groupValue: _radioValue1,
+                onChanged: (index) {},
               ),
-              SizedBox(width: 5),
               Text(
                 "Sex",
                 style: TextStyle(
@@ -96,12 +102,11 @@ class CustomAppBar extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
-              SizedBox(width: 15),
-              CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 8,
+              Radio(
+                value: 0,
+                groupValue: _radioValue1,
+                onChanged: (index) {},
               ),
-              SizedBox(width: 5),
               Text(
                 "Specie",
                 style: TextStyle(

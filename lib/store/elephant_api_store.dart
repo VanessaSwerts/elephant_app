@@ -12,13 +12,13 @@ abstract class _ElephantStoreBase with Store {
   @observable
   ObservableList<ElephantsAPI> elephantList = ObservableList<ElephantsAPI>();
 
+
   Future<ObservableList<ElephantsAPI>> loadElephantAPI() async {
     final responseData = await http.get(ConstsAPI.urlElephantAPI);
-    final data = jsonDecode(responseData.body);
-    //print(data);
+    final data = jsonDecode(responseData.body);  
     for (Map i in data) {
       if (ElephantsAPI.fromJson(i).name != null) {
-        elephantList.add(ElephantsAPI.fromJson(i));
+        elephantList.add(ElephantsAPI.fromJson(i));        
       }
     }
     return elephantList;

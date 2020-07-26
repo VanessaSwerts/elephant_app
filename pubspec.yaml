@@ -30,6 +30,7 @@ flutter:
    - assets/images/background_home.jpg
    - assets/images/background_list.jpg
    - assets/images/background_sort.jpg   
+   - assets/images/arjuana.jpg   
 
   fonts:
     - family: Lora
