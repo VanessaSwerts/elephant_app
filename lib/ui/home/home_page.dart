@@ -20,19 +20,29 @@ class _HomePageState extends State<HomePage> {
         {
           return SafeArea(
             top: false,
-            child: Stack(
-              children: <Widget>[
-                Image.asset(
-                  ConstsApp.background_home,
-                  height: 1000,
-                  fit: BoxFit.cover,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    ConstsApp.background_home,
+                  ),
                   alignment: Alignment(0.42, 0),
+                  fit: BoxFit.cover,
                 ),
-                CustomAppBar(),
-              ],
+              ),
+              child: ListView(
+                padding: EdgeInsets.all(0),
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      CustomAppBar(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           );
-        }     
+        }
       case 4:
         return SortElephantPage();
       default:

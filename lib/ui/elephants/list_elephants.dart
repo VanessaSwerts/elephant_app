@@ -12,7 +12,7 @@ class ListElephants extends StatefulWidget {
 
 class _ListElephantsState extends State<ListElephants> {
   ElephantStore _elephantStore;
-  int _valueDropBox = 0;
+  String dropdownValue = 'Name';
 
   @override
   void initState() {
@@ -66,69 +66,40 @@ class _ListElephantsState extends State<ListElephants> {
                 Row(
                   children: <Widget>[
                     Spacer(),
-                    Container(
-                      height: 25,
-                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white, border: Border.all()),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                            value: _valueDropBox,
-                            items: [
-                              DropdownMenuItem(
-                                child: Text(
-                                  "Order by",
-                                  style: TextStyle(
-                                    color: ConstsApp.primaryGreenColor,
-                                    fontFamily: "Lora",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                value: 0,
-                              ),
-                              DropdownMenuItem(
-                                child: Text(
-                                  "Name",
-                                  style: TextStyle(
-                                    color: ConstsApp.primaryGreenColor,
-                                    fontFamily: "Lora",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                value: 1,
-                              ),
-                              DropdownMenuItem(
-                                child: Text(
-                                  "Sex",
-                                  style: TextStyle(
-                                    color: ConstsApp.primaryGreenColor,
-                                    fontFamily: "Lora",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                value: 2,
-                              ),
-                              DropdownMenuItem(
-                                child: Text(
-                                  "Specie",
-                                  style: TextStyle(
-                                    color: ConstsApp.primaryGreenColor,
-                                    fontFamily: "Lora",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                value: 3,
-                              ),
-                            ],
-                            onChanged: (value) {
+                    Padding(
+                      padding: const EdgeInsets.only(right: 32.0),
+                      child: Container(
+                        height: 25,
+                        decoration: BoxDecoration(
+                            color: Colors.white, border: Border.all()),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            value: dropdownValue,                                                      
+                            onChanged: (String newValue) {
                               setState(() {
-                                _valueDropBox = value;
+                                dropdownValue = newValue;
                               });
-                            }),
+                            },
+                            items: <String>['Name', 'Sex', 'Specie']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Padding(
+                                  padding:  EdgeInsets.only(left: 5.0),
+                                  child: Text(
+                                    value,
+                                    style: TextStyle(
+                                      color: ConstsApp.primaryGreenColor,
+                                      fontFamily: "Lora",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                    ),                                    
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
                       ),
                     ),
                   ],

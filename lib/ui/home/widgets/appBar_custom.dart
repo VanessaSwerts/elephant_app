@@ -73,11 +73,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
           padding: const EdgeInsets.only(top: 10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: <Widget>[             
               Radio(
                   value: 0,
                   groupValue: _radioValue1,
-                  activeColor: Colors.white,                  
+                  activeColor: Colors.white,
                   onChanged: (index) {}),
               Text(
                 "Name",

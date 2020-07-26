@@ -1,7 +1,14 @@
 import 'package:elephant_app/conts/constsApp.dart';
 import 'package:flutter/material.dart';
 
-class FavoritesPage extends StatelessWidget {
+class FavoritesPage extends StatefulWidget {
+  @override
+  _FavoritesPageState createState() => _FavoritesPageState();
+}
+
+class _FavoritesPageState extends State<FavoritesPage> {
+  String dropdownValue = 'Name';
+
   @override
   Widget build(BuildContext context) {
     double screeHeight = MediaQuery.of(context).size.height;
@@ -33,6 +40,54 @@ class FavoritesPage extends StatelessWidget {
               height: screeHeight,
               width: screewidth,
               fit: BoxFit.cover,
+            ),
+            Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 30.0,
+                ),
+                Row(
+                  children: <Widget>[
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 32.0),
+                      child: Container(
+                        height: 25,
+                        decoration: BoxDecoration(
+                            color: Colors.white, border: Border.all()),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            value: dropdownValue,
+                            onChanged: (String newValue) {
+                              setState(() {
+                                dropdownValue = newValue;
+                              });
+                            },
+                            items: <String>['Name', 'Sex', 'Specie']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 5.0),
+                                  child: Text(
+                                    value,
+                                    style: TextStyle(
+                                      color: ConstsApp.primaryGreenColor,
+                                      fontFamily: "Lora",
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

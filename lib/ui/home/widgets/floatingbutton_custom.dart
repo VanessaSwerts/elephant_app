@@ -2,7 +2,14 @@ import 'package:elephant_app/conts/constsApp.dart';
 import 'package:flutter/material.dart';
 import 'package:elephant_app/conts/routes.dart';
 
-class CustomFloatingButton extends StatelessWidget {
+class CustomFloatingButton extends StatefulWidget {
+  @override
+  _CustomFloatingButtonState createState() => _CustomFloatingButtonState();
+}
+
+class _CustomFloatingButtonState extends State<CustomFloatingButton> {
+  bool isPressed = false;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,13 +25,25 @@ class CustomFloatingButton extends StatelessWidget {
               border: Border.all(color: Colors.white, width: 4),
               shape: BoxShape.circle,
               color: ConstsApp.brownColor),
-          child: Icon(
-            Icons.search,
-            size: 40,
-          ),
+          child: isPressed == false
+              ? Icon(
+                  Icons.search,
+                  size: 40,
+                )
+              : Center(
+                  child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                )),
         ),
-        onPressed: () {
+        onPressed: () async {
+          setState(() {
+            isPressed = true;
+          });
+          await Future.delayed(Duration(milliseconds: 3000), () => 30);
           Navigator.pushNamed(context, searchPage);
+          setState(() {
+            isPressed = false;
+          });
         },
       ),
     );
