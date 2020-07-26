@@ -16,6 +16,7 @@ const String sortElephantPage = '/sortElephantPage';
 const String yourElephantPage = '/yourElephantPage';
 
 class Router {
+   
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splash:

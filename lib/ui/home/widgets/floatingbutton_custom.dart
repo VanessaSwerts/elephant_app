@@ -1,6 +1,7 @@
+import 'package:animations/animations.dart';
 import 'package:elephant_app/conts/constsApp.dart';
+import 'package:elephant_app/ui/search/search_page.dart';
 import 'package:flutter/material.dart';
-import 'package:elephant_app/conts/routes.dart';
 
 class CustomFloatingButton extends StatefulWidget {
   @override
@@ -12,40 +13,31 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 70,
-      width: 70,
-      child: FloatingActionButton(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        child: Container(
-          height: 75,
-          width: 75,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 4),
-              shape: BoxShape.circle,
-              color: ConstsApp.brownColor),
-          child: isPressed == false
-              ? Icon(
-                  Icons.search,
-                  size: 40,
-                )
-              : Center(
-                  child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                )),
+    return OpenContainer(
+      transitionDuration: Duration(seconds: 1),
+      closedShape: CircleBorder(),
+      closedBuilder: (BuildContext c, VoidCallback action) => SizedBox(
+        height: 70,
+        width: 70,
+        child: FloatingActionButton(
+          onPressed: null,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          child: Container(
+              height: 75,
+              width: 75,
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 4),
+                  shape: BoxShape.circle,
+                  color: ConstsApp.brownColor),
+              child: Icon(
+                Icons.search,
+                size: 40,
+              )),
         ),
-        onPressed: () async {
-          setState(() {
-            isPressed = true;
-          });
-          await Future.delayed(Duration(milliseconds: 3000), () => 30);
-          Navigator.pushNamed(context, searchPage);
-          setState(() {
-            isPressed = false;
-          });
-        },
       ),
+      openBuilder: (BuildContext c, VoidCallback action) => SearchPage(),
+      tappable: true,
     );
   }
 }

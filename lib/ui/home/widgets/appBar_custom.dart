@@ -1,4 +1,6 @@
 import 'package:elephant_app/conts/constsApp.dart';
+import 'package:elephant_app/ui/home/widgets/radio_button_custom.dart';
+import 'package:elephant_app/ui/home/widgets/text_field_custom.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatefulWidget {
@@ -7,8 +9,6 @@ class CustomAppBar extends StatefulWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  int _radioValue1 = -1;
-
   @override
   Widget build(BuildContext context) {
     double appBarPhone = MediaQuery.of(context).padding.top;
@@ -16,7 +16,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(
-            top: appBarPhone,
+            top: appBarPhone + 16,
           ),
           child: Text(
             "Elephant App",
@@ -29,7 +29,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.only(top: 12.0),
           child: Text(
             "Search",
             style: TextStyle(
@@ -40,85 +40,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Container(
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.5),
-              border: Border.all(
-                color: ConstsApp.primaryGreenColor,
-                width: 0.5,
-              ),
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
-              ),
-              style: TextStyle(
-                color: ConstsApp.primaryGreenColor,
-                fontFamily: "Lora",
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-              ),
-              cursorColor: ConstsApp.primaryGreenColor,
-              textAlign: TextAlign.start,
-              textAlignVertical: TextAlignVertical.center,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[             
-              Radio(
-                  value: 0,
-                  groupValue: _radioValue1,
-                  activeColor: Colors.white,
-                  onChanged: (index) {}),
-              Text(
-                "Name",
-                style: TextStyle(
-                  color: ConstsApp.primaryGreenColor,
-                  fontFamily: "Lora",
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                ),
-              ),
-              Radio(
-                value: 0,
-                groupValue: _radioValue1,
-                onChanged: (index) {},
-              ),
-              Text(
-                "Sex",
-                style: TextStyle(
-                  color: ConstsApp.primaryGreenColor,
-                  fontFamily: "Lora",
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                ),
-              ),
-              Radio(
-                value: 0,
-                groupValue: _radioValue1,
-                onChanged: (index) {},
-              ),
-              Text(
-                "Specie",
-                style: TextStyle(
-                  color: ConstsApp.primaryGreenColor,
-                  fontFamily: "Lora",
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-        ),
+        CustomTextField(),
+        CustomRadioButton(),
       ],
     );
   }

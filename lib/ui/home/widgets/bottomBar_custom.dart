@@ -35,7 +35,7 @@ class CustomBottomBar extends StatelessWidget {
               ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.list),
+              icon: Icon(Icons.format_list_bulleted),
               title: Text(
                 'Elephants',
                 style: TextStyle(

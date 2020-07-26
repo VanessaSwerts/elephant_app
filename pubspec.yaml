@@ -16,6 +16,7 @@ dependencies:
   flutter_mobx: ^1.1.0+1
   http: ^0.12.2
   get_it: ^4.0.4
+  animations: ^1.1.1  
 
 dev_dependencies:
   flutter_test:
@@ -29,8 +30,7 @@ flutter:
    - assets/images/elephant_icon.png   
    - assets/images/background_home.jpg
    - assets/images/background_list.jpg
-   - assets/images/background_sort.jpg   
-   - assets/images/arjuana.jpg   
+   - assets/images/background_sort.jpg     
 
   fonts:
     - family: Lora

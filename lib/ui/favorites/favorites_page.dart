@@ -87,6 +87,43 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: Container(
+                    child: GridView.builder(
+                      physics: BouncingScrollPhysics(),
+                      // padding: EdgeInsets.all(10),
+                      addAutomaticKeepAlives: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 6.0,
+                        mainAxisSpacing: 6.0,
+                      ),
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {},
+                          child: Container(
+                            child: Card(
+                              semanticContainer: true,
+                              elevation: 8.0,
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 12.0,
+                                vertical: 8.0,
+                              ),
+                              child: Container(
+                                  child: Column(
+                                children: <Widget>[],
+                              )),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ],
