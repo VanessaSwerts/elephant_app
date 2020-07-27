@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:elephant_app/conts/constsApp.dart';
 import 'package:elephant_app/ui/home/widgets/appBar_custom.dart';
 import 'package:elephant_app/ui/home/widgets/bottomBar_custom.dart';
@@ -55,7 +56,22 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
-      body: pageCaller(currentIndex),
+      body: PageTransitionSwitcher(
+        duration: Duration(milliseconds: 600),
+        transitionBuilder: (
+          Widget child,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+        ) {
+          return FadeThroughTransition(
+            fillColor: ConstsApp.primaryGreenColor,
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          );
+        },
+        child: pageCaller(currentIndex),
+      ),
       floatingActionButton: CustomFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CustomBottomBar(
@@ -67,6 +83,7 @@ class _HomePageState extends State<HomePage> {
               setState(() {
                 currentIndex = 0;
               });
+
               Navigator.pushNamed(context, listElephants);
             } else if (currentIndex == 3) {
               setState(() {

@@ -1,5 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:elephant_app/conts/constsApp.dart';
+import 'package:elephant_app/ui/details/elephant_details.dart';
 import 'package:flutter/material.dart';
+import 'package:elephant_app/conts/routes.dart';
 
 class FavoritesPage extends StatefulWidget {
   @override
@@ -94,31 +97,73 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   child: Container(
                     child: GridView.builder(
                       physics: BouncingScrollPhysics(),
-                      // padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(12),
                       addAutomaticKeepAlives: true,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 0.8,
                         crossAxisCount: 2,
                         crossAxisSpacing: 6.0,
                         mainAxisSpacing: 6.0,
                       ),
                       itemCount: 10,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {},
-                          child: Container(
-                            child: Card(
-                              semanticContainer: true,
-                              elevation: 8.0,
-                              margin: EdgeInsets.symmetric(
-                                horizontal: 12.0,
-                                vertical: 8.0,
-                              ),
-                              child: Container(
-                                  child: Column(
-                                children: <Widget>[],
-                              )),
+                        return OpenContainer(
+                          transitionDuration: Duration(milliseconds: 1500),
+                          closedBuilder:
+                              (BuildContext c, VoidCallback action) => Card(
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  height: 115,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        ConstsApp.background_home,
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                ListTile(
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 5.0,
+                                  ),
+                                  title: Row(
+                                    children: <Widget>[
+                                      Text(
+                                        "elephant name ",
+                                        style: TextStyle(
+                                          color: ConstsApp.primaryGreenColor,
+                                          fontFamily: "Lora",
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Align(
+                                        child: Icon(
+                                          Icons.favorite,
+                                          color: ConstsApp.primaryGreenColor,
+                                        ),
+                                        alignment: Alignment.topRight,
+                                      ),
+                                    ],
+                                  ),
+                                  subtitle: Text(
+                                    "elephant specie ",
+                                    style: TextStyle(
+                                      color: ConstsApp.primaryGreenColor,
+                                      fontFamily: "Lora",
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
+                          openBuilder: (BuildContext c, VoidCallback action) =>
+                              ElephantDetail(),
+                          tappable: true,
                         );
                       },
                     ),

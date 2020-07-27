@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:elephant_app/conts/constsApp.dart';
 import 'package:elephant_app/conts/routes.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,12 @@ class Splash extends StatefulWidget {
   _SplashState createState() => _SplashState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
+  var _visible = true;
+
+  AnimationController animationController;
+  Animation<double> animation;
+
   @override
   void initState() {
     super.initState();
@@ -19,8 +26,24 @@ class _SplashState extends State<Splash> {
         DeviceOrientation.portraitDown,
       ],
     );
-    
-    Future.delayed(Duration(seconds: 3)).then(
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    animation = CurvedAnimation(
+      parent: animationController,
+      curve: Curves.easeOut,
+    );
+
+    animation.addListener(() => this.setState(() {}));
+    animationController.forward();
+
+    setState(() {
+      _visible = !_visible;
+    });
+
+    Future.delayed(Duration(milliseconds: 3500)).then(
       (_) {
         Navigator.pushReplacementNamed(context, home);
       },
@@ -32,6 +55,7 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       backgroundColor: ConstsApp.primaryGreenColor,
       body: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
           Center(
             heightFactor: 0.9,
@@ -41,8 +65,8 @@ class _SplashState extends State<Splash> {
               children: <Widget>[
                 Image.asset(
                   ConstsApp.elephant_icon,
-                  height: 130,
-                  width: 130,
+                  height: animation.value * 130,
+                  width: animation.value * 130,
                 ),
                 Text(
                   "Elephant App",
@@ -50,7 +74,7 @@ class _SplashState extends State<Splash> {
                     color: Colors.white,
                     fontFamily: "Lora",
                     fontWeight: FontWeight.w500,
-                    fontSize: 30,
+                    fontSize: animation.value * 30,
                   ),
                 ),
               ],

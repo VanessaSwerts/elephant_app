@@ -14,7 +14,7 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton> {
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
-      transitionDuration: Duration(seconds: 1),
+      transitionDuration: Duration(milliseconds: 1700),
       closedShape: CircleBorder(),
       closedBuilder: (BuildContext c, VoidCallback action) => SizedBox(
         height: 70,

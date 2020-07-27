@@ -1,3 +1,4 @@
+import 'package:elephant_app/ui/details/elephant_details.dart';
 import 'package:elephant_app/ui/elephants/list_elephants.dart';
 import 'package:elephant_app/ui/favorites/favorites_page.dart';
 import 'package:elephant_app/ui/home/home_page.dart';
@@ -14,9 +15,9 @@ const String favoritesPage = '/favoritesPage';
 const String searchPage = '/searchPage';
 const String sortElephantPage = '/sortElephantPage';
 const String yourElephantPage = '/yourElephantPage';
+const String elephantDetail = '/elephantDetail';
 
 class Router {
-   
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splash:
@@ -33,8 +34,10 @@ class Router {
         return MaterialPageRoute(builder: (_) => SortElephantPage());
       case yourElephantPage:
         return MaterialPageRoute(builder: (_) => YourElephantPage());
+      case elephantDetail:
+        return MaterialPageRoute(builder: (_) => ElephantDetail());
       default:
-        return MaterialPageRoute(builder: (_) => Splash());
+        return MaterialPageRoute(builder: (_) => HomePage());
     }
   }
 }

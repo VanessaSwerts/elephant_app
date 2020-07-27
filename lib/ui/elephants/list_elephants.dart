@@ -4,6 +4,7 @@ import 'package:elephant_app/store/elephant_api_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:elephant_app/conts/routes.dart';
 
 class ListElephants extends StatefulWidget {
   @override
@@ -74,7 +75,7 @@ class _ListElephantsState extends State<ListElephants> {
                             color: Colors.white, border: Border.all()),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton<String>(
-                            value: dropdownValue,                                                      
+                            value: dropdownValue,
                             onChanged: (String newValue) {
                               setState(() {
                                 dropdownValue = newValue;
@@ -85,7 +86,7 @@ class _ListElephantsState extends State<ListElephants> {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Padding(
-                                  padding:  EdgeInsets.only(left: 5.0),
+                                  padding: EdgeInsets.only(left: 5.0),
                                   child: Text(
                                     value,
                                     style: TextStyle(
@@ -93,7 +94,7 @@ class _ListElephantsState extends State<ListElephants> {
                                       fontFamily: "Lora",
                                       fontWeight: FontWeight.w500,
                                       fontSize: 14,
-                                    ),                                    
+                                    ),
                                   ),
                                 ),
                               );
@@ -127,7 +128,10 @@ class _ListElephantsState extends State<ListElephants> {
                               itemCount: _elephantStore.elephantList.length,
                               itemBuilder: (context, index) {
                                 return InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, elephantDetail);
+                                  },
                                   child: Container(
                                     width: 65,
                                     height: 65,
