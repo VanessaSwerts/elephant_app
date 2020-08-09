@@ -1,7 +1,10 @@
 import 'package:animations/animations.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elephant_app/conts/constsApp.dart';
+import 'package:elephant_app/store/elephant_api_store.dart';
 import 'package:elephant_app/ui/details/elephant_details.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class FavoritesPage extends StatefulWidget {
   @override
@@ -10,11 +13,20 @@ class FavoritesPage extends StatefulWidget {
 
 class _FavoritesPageState extends State<FavoritesPage> {
   String dropdownValue = 'Name';
+  ElephantStore _elephantStore;
+
+  @override
+  void initState() {
+    _elephantStore = GetIt.instance<ElephantStore>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     double screeHeight = MediaQuery.of(context).size.height;
     double screewidth = MediaQuery.of(context).size.width;
+    if (_elephantStore.favoriteElephantList.isEmpty)
+      Future.delayed(Duration.zero, () => showAlert(context));
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: ConstsApp.brownColor,
@@ -104,7 +116,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         crossAxisSpacing: 6.0,
                         mainAxisSpacing: 6.0,
                       ),
-                      itemCount: 10,
+                      itemCount: _elephantStore.favoriteElephantList.length,
                       itemBuilder: (context, index) {
                         return OpenContainer(
                           transitionDuration: Duration(milliseconds: 1500),
@@ -112,14 +124,23 @@ class _FavoritesPageState extends State<FavoritesPage> {
                               (BuildContext c, VoidCallback action) => Card(
                             child: Column(
                               children: <Widget>[
-                                Container(
-                                  height: 115,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        ConstsApp.background_home,
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      _elephantStore.elephantList[index].image,                                
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white),
+                                    strokeWidth: 3.0,
+                                  ),
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
+                                    height: 115,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: imageProvider,                                        
+                                        fit: BoxFit.cover,
                                       ),
-                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
@@ -128,27 +149,45 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                     horizontal: 5.0,
                                   ),
                                   title: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Text(
-                                        "elephant name ",
-                                        style: TextStyle(
-                                          color: ConstsApp.primaryGreenColor,
-                                          fontFamily: "Lora",
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
+                                      SizedBox(
+                                        width: 120,
+                                        child: Text(
+                                          _elephantStore
+                                              .favoriteElephantList[index].name,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: ConstsApp.primaryGreenColor,
+                                            fontFamily: "Lora",
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16,
+                                          ),
                                         ),
                                       ),
                                       Align(
-                                        child: Icon(
-                                          Icons.favorite,
-                                          color: ConstsApp.primaryGreenColor,
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              _elephantStore.setFavElepahnt(
+                                                  _elephantStore
+                                                      .foundFavElephant(index));
+                                            });
+                                          },
+                                          child: Icon(
+                                            Icons.favorite,
+                                            color: ConstsApp.primaryGreenColor,
+                                          ),
                                         ),
                                         alignment: Alignment.topRight,
                                       ),
                                     ],
                                   ),
                                   subtitle: Text(
-                                    "elephant specie ",
+                                    _elephantStore
+                                        .favoriteElephantList[index].species,
                                     style: TextStyle(
                                       color: ConstsApp.primaryGreenColor,
                                       fontFamily: "Lora",
@@ -161,7 +200,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             ),
                           ),
                           openBuilder: (BuildContext c, VoidCallback action) =>
-                              ElephantDetail(),
+                              ElephantDetail(
+                            index: _elephantStore.foundFavElephant(index),
+                          ),
                           tappable: true,
                         );
                       },
@@ -173,6 +214,44 @@ class _FavoritesPageState extends State<FavoritesPage> {
           ],
         ),
       ),
+    );
+  }
+
+  void showAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(
+            "You don't have any favorite elephant yet.",
+            style: TextStyle(
+              color: ConstsApp.primaryGreenColor,
+              fontFamily: "Lora",
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+              child: Text(
+                "Back Home",
+                style: TextStyle(
+                  color: ConstsApp.primaryGreenColor,
+                  fontFamily: "Lora",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+        );
+      },
     );
   }
 }

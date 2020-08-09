@@ -77,12 +77,12 @@ class _SortElephantPageState extends State<SortElephantPage> {
                     height: 50,
                     onPressed: () async {
                       await Future.delayed(
-                          Duration(milliseconds: 3000), () => 30);
-                      _randomElephantStore
-                          .loadRandomElephantAPI()
-                          .then((random) {
-                        Navigator.pushNamed(context, yourElephantPage);
-                      });
+                          Duration(milliseconds: 3000),
+                          () => _randomElephantStore
+                                  .loadRandomElephantAPI()
+                                  .then((random) {
+                                Navigator.pushNamed(context, yourElephantPage);
+                              }));
                     },
                   ),
                 ),

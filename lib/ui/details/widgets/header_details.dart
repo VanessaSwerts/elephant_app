@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 class HeaderDetails extends StatefulWidget {
-  final int index;
-
+  final int index; 
   HeaderDetails({this.index});
-
+  
   @override
   _HeaderDetailsState createState() => _HeaderDetailsState();
 }

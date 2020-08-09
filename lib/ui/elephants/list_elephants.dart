@@ -6,7 +6,6 @@ import 'package:elephant_app/ui/details/elephant_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:elephant_app/conts/routes.dart';
 
 class ListElephants extends StatefulWidget {
   @override

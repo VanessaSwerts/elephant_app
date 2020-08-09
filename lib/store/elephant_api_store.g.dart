@@ -24,10 +24,42 @@ mixin _$ElephantStore on _ElephantStoreBase, Store {
     });
   }
 
+  final _$favoriteElephantListAtom =
+      Atom(name: '_ElephantStoreBase.favoriteElephantList');
+
+  @override
+  ObservableList<ElephantsAPI> get favoriteElephantList {
+    _$favoriteElephantListAtom.reportRead();
+    return super.favoriteElephantList;
+  }
+
+  @override
+  set favoriteElephantList(ObservableList<ElephantsAPI> value) {
+    _$favoriteElephantListAtom.reportWrite(value, super.favoriteElephantList,
+        () {
+      super.favoriteElephantList = value;
+    });
+  }
+
+  final _$_ElephantStoreBaseActionController =
+      ActionController(name: '_ElephantStoreBase');
+
+  @override
+  dynamic setFavElepahnt(int index) {
+    final _$actionInfo = _$_ElephantStoreBaseActionController.startAction(
+        name: '_ElephantStoreBase.setFavElepahnt');
+    try {
+      return super.setFavElepahnt(index);
+    } finally {
+      _$_ElephantStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-elephantList: ${elephantList}
+elephantList: ${elephantList},
+favoriteElephantList: ${favoriteElephantList}
     ''';
   }
 }

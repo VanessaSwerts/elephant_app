@@ -21,18 +21,15 @@ abstract class _RandomElephantStoreBase with Store {
   Future<ObservableList<ElephantsAPI>> loadRandomElephantAPI() async {
      randomElephantList = ObservableList<ElephantsAPI>();
     final responseData = await http.get(ConstsAPI.urlRandomElephant);
-    final data = jsonDecode(responseData.body);
-    print(data);
+    final data = jsonDecode(responseData.body);   
     for (Map i in data) {
       if (ElephantsAPI.fromJson(i).name != null) {       
-        randomElephantList.add(ElephantsAPI.fromJson(i));
-        print(ElephantsAPI.fromJson(i).name);
+        randomElephantList.add(ElephantsAPI.fromJson(i));      
       } else {
         await loadRandomElephantAPI();
       }
     }
-    _randomElephant = randomElephantList[0];
-    print(_randomElephant.name);
+    _randomElephant = randomElephantList[0];    
     return randomElephantList;
   }
 }

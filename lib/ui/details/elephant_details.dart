@@ -45,11 +45,15 @@ class _ElephantDetailState extends State<ElephantDetail> {
               color: ConstsApp.secondaryGreenColor,
             ),
           ),
-          HeaderDetails(index: index,),
-          BodyDetails(index: index,),
+          HeaderDetails(
+            index: index,
+          ),
+          BodyDetails(
+            index: index,
+          ),
         ],
       ),
-      floatingActionButton: FloatingButtonDetail(),
+      floatingActionButton: FloatingButtonDetail(index: index,),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
