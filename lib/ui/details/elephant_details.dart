@@ -5,6 +5,10 @@ import 'package:elephant_app/ui/details/widgets/header_details.dart';
 import 'package:flutter/material.dart';
 
 class ElephantDetail extends StatefulWidget {
+  final int index;
+
+  ElephantDetail({this.index});
+
   @override
   _ElephantDetailState createState() => _ElephantDetailState();
 }
@@ -12,6 +16,7 @@ class ElephantDetail extends StatefulWidget {
 class _ElephantDetailState extends State<ElephantDetail> {
   @override
   Widget build(BuildContext context) {
+    int index = widget.index;
     return Scaffold(
       backgroundColor: ConstsApp.primaryGreenColor,
       appBar: PreferredSize(
@@ -40,8 +45,8 @@ class _ElephantDetailState extends State<ElephantDetail> {
               color: ConstsApp.secondaryGreenColor,
             ),
           ),
-          HeaderDetails(),
-          BodyDetails(),
+          HeaderDetails(index: index,),
+          BodyDetails(index: index,),
         ],
       ),
       floatingActionButton: FloatingButtonDetail(),

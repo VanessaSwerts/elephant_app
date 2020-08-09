@@ -1,6 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elephant_app/conts/constsApp.dart';
 import 'package:elephant_app/store/elephant_api_store.dart';
+import 'package:elephant_app/ui/details/elephant_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
@@ -127,12 +129,14 @@ class _ListElephantsState extends State<ListElephants> {
                               ),
                               itemCount: _elephantStore.elephantList.length,
                               itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, elephantDetail);
-                                  },
-                                  child: Container(
+                                return OpenContainer(
+                                  // openColor: ConstsApp.opacityGreenColor, 
+                                  closedColor: ConstsApp.opacityGreenColor,                                  
+                                  transitionDuration:
+                                      Duration(milliseconds: 1500),
+                                  closedBuilder:
+                                      (BuildContext c, VoidCallback action) =>
+                                          Container(
                                     width: 65,
                                     height: 65,
                                     color: ConstsApp.opacityGreenColor,
@@ -183,6 +187,12 @@ class _ListElephantsState extends State<ListElephants> {
                                       ],
                                     ),
                                   ),
+                                  openBuilder:
+                                      (BuildContext c, VoidCallback action) =>
+                                          ElephantDetail(
+                                            index: index,
+                                          ),
+                                  tappable: true,
                                 );
                               });
                     },

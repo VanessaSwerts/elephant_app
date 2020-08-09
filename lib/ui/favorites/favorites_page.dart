@@ -2,7 +2,6 @@ import 'package:animations/animations.dart';
 import 'package:elephant_app/conts/constsApp.dart';
 import 'package:elephant_app/ui/details/elephant_details.dart';
 import 'package:flutter/material.dart';
-import 'package:elephant_app/conts/routes.dart';
 
 class FavoritesPage extends StatefulWidget {
   @override

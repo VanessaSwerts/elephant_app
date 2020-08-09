@@ -10,28 +10,29 @@ class RandomElephantStore = _RandomElephantStoreBase with _$RandomElephantStore;
 
 abstract class _RandomElephantStoreBase with Store {
   @observable
-  ObservableList<ElephantsAPI> randomElephantList =
-      ObservableList<ElephantsAPI>();
+  ObservableList<ElephantsAPI> randomElephantList;
 
   @observable
-  ElephantsAPI randomElephant; 
+  ElephantsAPI _randomElephant; 
 
-  // @computed
-  // ElephantsAPI get randomElephant => _randomElephant = randomElephantList[0];
+  @computed
+  ElephantsAPI get randomElephant => _randomElephant = randomElephantList[0];
 
   Future<ObservableList<ElephantsAPI>> loadRandomElephantAPI() async {
+     randomElephantList = ObservableList<ElephantsAPI>();
     final responseData = await http.get(ConstsAPI.urlRandomElephant);
     final data = jsonDecode(responseData.body);
     print(data);
     for (Map i in data) {
-      if (ElephantsAPI.fromJson(i).name != null) {
+      if (ElephantsAPI.fromJson(i).name != null) {       
         randomElephantList.add(ElephantsAPI.fromJson(i));
-        print(ElephantsAPI.fromJson(i));
+        print(ElephantsAPI.fromJson(i).name);
       } else {
         await loadRandomElephantAPI();
       }
     }
-    randomElephant = randomElephantList[0];
+    _randomElephant = randomElephantList[0];
+    print(_randomElephant.name);
     return randomElephantList;
   }
 }
