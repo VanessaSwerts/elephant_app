@@ -1,5 +1,8 @@
 import 'package:elephant_app/conts/constsApp.dart';
+import 'package:elephant_app/store/search_elephant_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
 class CustomRadioButton extends StatefulWidget {
   @override
@@ -7,7 +10,14 @@ class CustomRadioButton extends StatefulWidget {
 }
 
 class _CustomRadioButtonState extends State<CustomRadioButton> {
-  int _radioValue1 = -1;
+   SearchElephantStore _searchElephantStore;
+
+  @override
+  void initState() {
+    _searchElephantStore = GetIt.instance<SearchElephantStore>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,15 +28,15 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
           SizedBox(
             width: 30,
             height: 30,
-            child: Radio(
-                value: 0,
-                groupValue: _radioValue1,
-                activeColor: ConstsApp.primaryGreenColor,
-                onChanged: (index) {
-                  setState(() {
-                    _radioValue1 = 0;
+            child: Observer(builder: (_) {
+              return Radio(
+                  value: 0,
+                  groupValue: _searchElephantStore.searchType,
+                  activeColor: ConstsApp.primaryGreenColor,
+                  onChanged: (index) {
+                    _searchElephantStore.setSearchType(0);
                   });
-                }),
+            }),
           ),
           Text(
             "Name",
@@ -43,16 +53,16 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
           SizedBox(
             width: 30,
             height: 30,
-            child: Radio(
-              value: 1,
-              groupValue: _radioValue1,
-              activeColor: ConstsApp.primaryGreenColor,
-              onChanged: (index) {
-                setState(() {
-                  _radioValue1 = 1;
-                });
-              },
-            ),
+            child: Observer(builder: (_) {
+              return Radio(
+                value: 1,
+                groupValue: _searchElephantStore.searchType,
+                activeColor: ConstsApp.primaryGreenColor,
+                onChanged: (index) {
+                  _searchElephantStore.setSearchType(1);
+                },
+              );
+            }),
           ),
           Text(
             "Sex",
@@ -69,16 +79,16 @@ class _CustomRadioButtonState extends State<CustomRadioButton> {
           SizedBox(
             width: 30,
             height: 30,
-            child: Radio(
-              value: 2,
-              groupValue: _radioValue1,
-              activeColor: ConstsApp.primaryGreenColor,
-              onChanged: (index) {
-                setState(() {
-                  _radioValue1 = 2;
-                });
-              },
-            ),
+            child: Observer(builder: (_) {
+              return Radio(
+                value: 2,
+                groupValue: _searchElephantStore.searchType,
+                activeColor: ConstsApp.primaryGreenColor,
+                onChanged: (index) {
+                  _searchElephantStore.setSearchType(2);
+                },
+              );
+            }),
           ),
           Text(
             "Specie",

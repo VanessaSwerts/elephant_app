@@ -117,7 +117,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         mainAxisSpacing: 6.0,
                       ),
                       itemCount: _elephantStore.favoriteElephantList.length,
-                      itemBuilder: (context, index) {
+                      itemBuilder: (context, index) {                      
                         return OpenContainer(
                           transitionDuration: Duration(milliseconds: 1500),
                           closedBuilder:
@@ -126,7 +126,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                               children: <Widget>[
                                 CachedNetworkImage(
                                   imageUrl:
-                                      _elephantStore.elephantList[index].image,                                
+                                      _elephantStore.favoriteElephantList[index].image,
                                   placeholder: (context, url) =>
                                       CircularProgressIndicator(
                                     valueColor: AlwaysStoppedAnimation<Color>(
@@ -138,7 +138,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                     height: 115,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                        image: imageProvider,                                        
+                                        image: imageProvider,
                                         fit: BoxFit.cover,
                                       ),
                                     ),

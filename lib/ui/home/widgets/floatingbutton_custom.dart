@@ -1,7 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:elephant_app/conts/constsApp.dart';
+import 'package:elephant_app/store/search_elephant_store.dart';
 import 'package:elephant_app/ui/search/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
 class CustomFloatingButton extends StatefulWidget {
   @override
@@ -11,6 +14,14 @@ class CustomFloatingButton extends StatefulWidget {
 class _CustomFloatingButtonState extends State<CustomFloatingButton> {
   bool isPressed = false;
 
+  SearchElephantStore _searchElephantStore;
+
+  @override
+  void initState() {
+    _searchElephantStore = GetIt.instance<SearchElephantStore>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
@@ -19,22 +30,26 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton> {
       closedBuilder: (BuildContext c, VoidCallback action) => SizedBox(
         height: 70,
         width: 70,
-        child: FloatingActionButton(
-          onPressed: null,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          child: Container(
-              height: 75,
-              width: 75,
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 4),
-                  shape: BoxShape.circle,
-                  color: ConstsApp.brownColor),
-              child: Icon(
-                Icons.search,
-                size: 40,
-              )),
-        ),
+        child: Observer(builder: (_) {
+          return FloatingActionButton(
+            onPressed: _searchElephantStore.searchField != ""
+                ? _searchElephantStore.setListSearch
+                : null,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: Container(
+                height: 75,
+                width: 75,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 4),
+                    shape: BoxShape.circle,
+                    color: ConstsApp.brownColor),
+                child: Icon(
+                  Icons.search,
+                  size: 40,
+                )),
+          );
+        }),
       ),
       openBuilder: (BuildContext c, VoidCallback action) => SearchPage(),
       tappable: true,

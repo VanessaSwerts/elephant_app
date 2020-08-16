@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elephant_app/conts/constsApp.dart';
 import 'package:elephant_app/models/elephantAPI.dart';
 import 'package:elephant_app/store/random_elephant_store.dart';
-import 'package:elephant_app/ui/details/elephant_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_progress_button/flutter_progress_button.dart';

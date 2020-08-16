@@ -5,10 +5,10 @@ class ConstsAPI {
   static String urlRandomElephant =
       "https://elephant-api.herokuapp.com/elephants/random";
   static String urlSearchBySex =
-      "https://elephant-api.herokuapp.com/elephants/sex/";
+      "https://elephant-api.herokuapp.com/elephants/sex";
   static String urlSearchByName =
-      "https://elephant-api.herokuapp.com/elephants/name/";
+      "https://elephant-api.herokuapp.com/elephants/name";
   static String urlSearchBySpecie =
-      "https://elephant-api.herokuapp.com/species/";
+      "https://elephant-api.herokuapp.com/species";
 
 }

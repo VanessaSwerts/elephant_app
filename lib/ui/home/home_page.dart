@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
       body: PageTransitionSwitcher(
-        duration: Duration(milliseconds: 600),
+        duration: Duration(milliseconds: 800),
         transitionBuilder: (
           Widget child,
           Animation<double> animation,

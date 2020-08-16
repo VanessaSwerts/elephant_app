@@ -9,6 +9,10 @@ part 'elephant_api_store.g.dart';
 class ElephantStore = _ElephantStoreBase with _$ElephantStore;
 
 abstract class _ElephantStoreBase with Store {
+  List<String> listName = List();
+  List<String> listSex = List();
+  List<String> listSpecie = List();
+
   @observable
   ObservableList<ElephantsAPI> elephantList = ObservableList<ElephantsAPI>();
 
@@ -25,6 +29,22 @@ abstract class _ElephantStoreBase with Store {
     } else if (favoriteElephantList.contains(elephantList[index])) {
       favoriteElephantList.remove(elephantList[index]);
     }
+  }
+
+  void setLists() async {
+    for (int i = 0; i < elephantList.length; i++) {
+      listName.add(elephantList[i].name);
+
+      if (!listSpecie.contains(elephantList[i].species))
+        listSpecie.add(elephantList[i].species);
+
+      if (!listSex.contains(elephantList[i].sex))
+        listSex.add(elephantList[i].sex);
+    }
+
+    print(listName);
+    print(listSpecie);
+    print(listSex);
   }
 
   int foundFavElephant(int index) {
@@ -44,6 +64,7 @@ abstract class _ElephantStoreBase with Store {
         elephantList.add(ElephantsAPI.fromJson(i));
       }
     }
+    setLists();
     return elephantList;
   }
 }
