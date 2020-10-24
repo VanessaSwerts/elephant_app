@@ -1,10 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:elephant_app/conts/constsApp.dart';
-import 'package:elephant_app/store/search_elephant_store.dart';
 import 'package:elephant_app/ui/search/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get_it/get_it.dart';
 
 class CustomFloatingButton extends StatefulWidget {
   @override
@@ -12,16 +10,6 @@ class CustomFloatingButton extends StatefulWidget {
 }
 
 class _CustomFloatingButtonState extends State<CustomFloatingButton> {
-  bool isPressed = false;
-
-  SearchElephantStore _searchElephantStore;
-
-  @override
-  void initState() {
-    _searchElephantStore = GetIt.instance<SearchElephantStore>();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return OpenContainer(
@@ -32,9 +20,7 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton> {
         width: 70,
         child: Observer(builder: (_) {
           return FloatingActionButton(
-            onPressed: _searchElephantStore.searchField != ""
-                ? _searchElephantStore.setListSearch
-                : null,
+            onPressed: null,
             backgroundColor: Colors.transparent,
             elevation: 0,
             child: Container(

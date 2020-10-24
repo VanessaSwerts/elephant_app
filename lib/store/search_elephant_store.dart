@@ -11,11 +11,17 @@ abstract class _SearchElephantStoreBase with Store {
   @observable
   int _searchType = 0;
 
+  @observable
+  bool searched = false;
+
   @computed
   int get searchType => _searchType;
 
   @observable
   ElephantsAPI searchNameElephant;
+
+  @observable
+  ObservableList<ElephantsAPI> searchListName;
 
   @observable
   ObservableList<ElephantsAPI> searchListSex;
@@ -28,14 +34,19 @@ abstract class _SearchElephantStoreBase with Store {
     _searchType = value;
   }
 
+  @action
+  setSearched(bool value) {
+    searched = value;
+  }
+
   @observable
   String searchField = "";
 
   @action
   void setSearch(String textSearch) => searchField = textSearch.toLowerCase();
 
-
   void setListSearch() async {
+    setSearched(true);
     switch (searchType) {
       case 0:
         await _searchNameURL(searchField);
@@ -51,13 +62,22 @@ abstract class _SearchElephantStoreBase with Store {
     }
   }
 
+  void resetSearch() {
+    searchListName = ObservableList<ElephantsAPI>();
+    searchListSex = ObservableList<ElephantsAPI>();
+    searchListSpecie = ObservableList<ElephantsAPI>();
+    setSearch('');
+    setSearched(false);
+  }
+
   Future<ElephantsAPI> _searchNameURL(String searchName) async {
+    searchListName = ObservableList<ElephantsAPI>();
     final responseData =
         await http.get(ConstsAPI.urlSearchByName + "/$searchName");
     final data = jsonDecode(responseData.body);
     searchNameElephant = ElephantsAPI.fromJson(data);
+    searchListName.add(searchNameElephant);
 
-    print(searchNameElephant);
     return searchNameElephant;
   }
 
@@ -71,8 +91,6 @@ abstract class _SearchElephantStoreBase with Store {
         searchListSex.add(ElephantsAPI.fromJson(i));
       }
     }
-
-    print(searchListSex.length);
     return searchListSex;
   }
 
@@ -87,7 +105,6 @@ abstract class _SearchElephantStoreBase with Store {
         searchListSpecie.add(ElephantsAPI.fromJson(i));
       }
     }
-
     return searchListSpecie;
   }
 }
